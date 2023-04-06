@@ -46,8 +46,6 @@ input[type="date"]:focus::-webkit-calendar-picker-indicator {
   opacity: 1;
 }
 
-
-
 label {
   color: #999;
   font-size: 22px;
@@ -59,7 +57,6 @@ label {
   transition: 0.2s ease all;
   -moz-transition: 0.2s ease all;
   -webkit-transition: 0.2s ease all;
-
 }
 
 .input:focus~label,
@@ -203,8 +200,6 @@ label {
   transform: rotate(360deg);
 }
 
-/*.search_icon a:hover i  {
-	transform:rotate(360deg);}*/
 .Facebook {
   background-color: #2C80D3;
   color: #FFF;

@@ -1,22 +1,18 @@
 function validatePassword() {
   const str = document.getElementById("password").value;
-  if (str.length < 7) {
-    alert("Password should contain at least one special character, one digit, and one capital letter");
-    document.getElementById("password").value = "";
-    return false;
-  }
   const regex = /^(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?])(?=.*\d)(?=.*[A-Z])/;
-  if (!regex.test(str)) {
+
+  if (str.length < 7 || !regex.test(str)) {
     alert("Password should contain at least one special character, one digit, and one capital letter");
     document.getElementById("password").value = "";
     return false;
   }
+
   return true;
 }
 
 
 function validatePhoneNumber() {
-  // Remove all non-numeric characters
   const cleanNumber = document.getElementById("phone").value;
 
   if (/\D/.test(cleanNumber)) {
@@ -33,12 +29,12 @@ function validatePhoneNumber() {
     return false;
   }
 
-  
+
   return true;
 }
 
 
-function validateFirstName() {
+function validateName() {
   const firstNameInput = document.getElementById("fname");
   const firstName = firstNameInput.value;
 
@@ -59,64 +55,62 @@ let emailValidated = false;
 let usernameValidated = false;
 
 function validateEmail() {
-  if (emailValidated) {
-    return;
-  }
-
+  let isEmailValidated = false;
   const emailInput = document.getElementById("email");
   const email = emailInput.value;
 
   if (!email) {
     alert("Please enter an email address");
-    emailValidated = true;
+    isEmailValidated = true;
     return false;
   }
 
   if (!/\S+@\S+\.\S+/.test(email)) {
     alert("Please enter a valid email address");
-    document.getElementById("email").value = "";
-    emailValidated = true;
+    emailInput.value = "";
+    isEmailValidated = true;
     return false;
   }
 
-  emailValidated = true;
+  isEmailValidated = true;
+  return true;
 }
+
 
 function validateUsername() {
-  if (usernameValidated) {
-    return;
-  }
+  let isUsernameValidated = false;
+  const usernameInput = document.getElementById("username");
+  const username = usernameInput.value;
 
-  var username = document.getElementById("username").value;
   if (username.length < 6) {
     alert("Username must be at least 6 characters long.");
-    document.getElementById("username").value = "";
-    usernameValidated = true;
+    usernameInput.value = "";
+    isUsernameValidated = true;
     return false;
   }
 
-  usernameValidated = true;
+  isUsernameValidated = true;
+  return true;
 }
 
+
 const form = document.querySelector('#my-form');
-    form.addEventListener('submit', submitForm);
+form.addEventListener('submit', submitForm);
 
-    async function submitForm(event) {
-        event.preventDefault();
+async function submitForm(event) {
+  event.preventDefault();
 
-        const formData = new FormData(form);
+  const formData = new FormData(form);
 
-        await fetch('https://docs.google.com/forms/d/e/1FAIpQLSdKaRFIimK99RJTk8laTEPhJ6Qz9-Bq8FmYeLjpH-CjkkUxQA/formResponse', {
-            method: 'POST',
-            body: formData,
-            mode: 'no-cors'
-        });
+  await fetch('https://docs.google.com/forms/d/e/1FAIpQLSdKaRFIimK99RJTk8laTEPhJ6Qz9-Bq8FmYeLjpH-CjkkUxQA/formResponse', {
+    method: 'POST',
+    body: formData,
+    mode: 'no-cors'
+  });
 
-        const successMessage = document.querySelector('#success-message');
-        successMessage.style.display = 'block';
-        const element = document.querySelector('#success-message');
-        element.scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"});
-        form.reset();
-    }
-
-
+  const successMessage = document.querySelector('#success-message');
+  successMessage.style.display = 'block';
+  const element = document.querySelector('#success-message');
+  element.scrollIntoView({ behavior: "smooth", block: "start", inline: "nearest" });
+  form.reset();
+}
