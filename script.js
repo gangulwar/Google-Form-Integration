@@ -35,19 +35,21 @@ function validatePhoneNumber() {
 
 
 function validateName() {
-  const firstNameInput = document.getElementById("fname");
-  const firstName = firstNameInput.value;
+  const nameInput = document.getElementById("fname");
+  const name = nameInput.value;
 
-  if (!firstName) {
-    alert("Please enter your first name");
+  if (!name) {
+    alert("Please enter your name");
     return false;
   }
 
-  if (!/^[a-zA-Z]+$/.test(firstName)) {
-    alert("First name can only contain alphabets");
-    firstNameInput.value = "";
+  if (!/^[a-zA-Z ]+$/.test(name)) {
+    alert("Name can only contain alphabets and spaces");
+    nameInput.value = "";
     return false;
   }
+
+  return true;
 }
 
 
